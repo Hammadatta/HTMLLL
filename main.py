@@ -1,18 +1,17 @@
 
 import streamlit as st
+import streamlit.components.v1 as components
 
-st.set_page_config(page_title="Qorvex AI", layout="wide")
+# Set page config
+st.set_page_config(page_title="Qorvex AI – Web Preview", layout="wide")
 
-st.title("🚀 Qorvex AI Risk Monitor")
-st.markdown("Monitor prompt injection, plugin abuse, and risky inputs.")
+# Title or description
+st.title("🌐 Qorvex AI Web App Preview")
+st.markdown("This is a live preview of your HTML landing page rendered inside Streamlit.")
 
-# Test input field
-user_prompt = st.text_input("🔍 Enter a user prompt to analyze:")
+# Load HTML file
+with open("index.html", "r", encoding="utf-8") as f:
+    html_code = f.read()
 
-# Simple pattern-based detector
-blacklist = ["ignore", "you are now", "act as", "jailbreak", "simulate", "###", "system prompt"]
-if user_prompt:
-    if any(term in user_prompt.lower() for term in blacklist):
-        st.error("⚠️ Prompt Injection Detected!")
-    else:
-        st.success("✅ Prompt is clean.")
+# Display HTML using iframe-style embedding
+components.html(html_code, height=800, scrolling=True)
